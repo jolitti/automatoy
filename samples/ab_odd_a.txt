@@ -1,0 +1,6 @@
+// this automaton will recognize any string of as and bs
+// with an odd number of as
+ALPHABET: ab
+TRANSITIONS:
+q1  -> q2 q1
+*q2 -> q1 q2
