@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap,HashSet};
 use itertools::Itertools;
 
 use crate::dfa::Dfa;
@@ -21,7 +21,7 @@ pub fn parse(source:&str) -> Option<Dfa> {
         .enumerate()
         .map(|(i,c)| (c,i))
         .collect();
-    dbg!(&alphabet);
+    //dbg!(&alphabet);
 
     let states: HashMap<String,usize> = lines.iter().skip(2)
         .map(|s| {
@@ -35,7 +35,14 @@ pub fn parse(source:&str) -> Option<Dfa> {
         .enumerate()
         .map(|(i,c)| (c,i))
         .collect();
-    dbg!(&states);
+    //dbg!(&states);
+
+    let final_states: HashSet<usize> = lines.iter().skip(2)
+        .enumerate()
+        .filter(|(_i,l)| l.starts_with("*"))
+        .map(|(i,_l)| i)
+        .collect();
+    //dbg!(&final_states);
 
     let mut transitions: Vec<Vec<usize>> = Vec::new();
     for line in lines.iter().skip(2) {
@@ -49,8 +56,7 @@ pub fn parse(source:&str) -> Option<Dfa> {
     // dbg!(&transitions);
     if transitions.len() != states.len() { return None; }
 
-    // TODO
-
-    None
-
+    Some(
+        Dfa::new(alphabet,final_states,transitions)
+        )
 }
