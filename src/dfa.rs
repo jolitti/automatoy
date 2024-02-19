@@ -2,7 +2,7 @@ use std::collections::{HashSet,HashMap};
 
 /// Deterministic finite automaton
 #[derive(Debug)]
-struct Dfa {
+pub struct Dfa {
     /// Set of acceptable characters in the consumed string
     /// mapped to corresponding index
     alphabet: HashMap<char,usize>,
