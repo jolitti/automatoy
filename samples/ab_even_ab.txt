@@ -1,0 +1,8 @@
+// this automaton will recognize any string of as and bs
+// with an even number of both as and bs
+ALPHABET: ab
+TRANSITIONS:
+*aabb -> abb aab
+abb -> aabb ab
+aab -> ab aabb
+ab -> aab abb

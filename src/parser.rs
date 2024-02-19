@@ -53,7 +53,7 @@ pub fn parse(source:&str) -> Option<Dfa> {
             transitions.push(new_trans);
         }
     }
-    // dbg!(&transitions);
+    //dbg!(&transitions);
     if transitions.len() != states.len() { return None; }
 
     Some(
