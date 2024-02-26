@@ -11,7 +11,7 @@ pub fn parse(source:&str) -> Option<Dfa> {
 
     let lines = source.lines()
         .filter(|line| !line.is_empty())
-        .filter(|line| !line.starts_with("/"))
+        .filter(|line| !line.starts_with("//"))
         .collect::<Vec<_>>();
 
     let alphabet: HashMap<char,usize> = lines.get(0)?
@@ -36,6 +36,11 @@ pub fn parse(source:&str) -> Option<Dfa> {
         .map(|(i,c)| (c,i))
         .collect();
     //dbg!(&states);
+    
+    let mut state_names: Vec<String> = vec![String::from("");states.len()];
+    for (name,index) in states.iter() {
+        state_names[*index] = name.clone();
+    }
 
     let final_states: HashSet<usize> = lines.iter().skip(2)
         .enumerate()
@@ -57,6 +62,6 @@ pub fn parse(source:&str) -> Option<Dfa> {
     if transitions.len() != states.len() { return None; }
 
     Some(
-        Dfa::new(alphabet,final_states,transitions)
+        Dfa::new(alphabet,state_names,final_states,transitions)
         )
 }

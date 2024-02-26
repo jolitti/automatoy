@@ -7,6 +7,9 @@ pub struct Dfa {
     /// mapped to corresponding index
     alphabet: HashMap<char,usize>,
 
+    /// Map from state number to state name
+    state_names: Vec<String>,
+
     /// Set of final states
     final_states: HashSet<usize>,
 
@@ -23,6 +26,10 @@ impl Dfa {
     /// True if current state is in final
     pub fn is_in_final(&self) -> bool {
         self.final_states.contains(&self.state)
+    }
+
+    pub fn current_state_name(&self) -> String {
+        self.state_names[self.state].clone()
     }
 
     /// True if character is in alphabet
@@ -43,11 +50,13 @@ impl Dfa {
     /// Initialize new DFA
     pub fn new(
         alpha:HashMap<char,usize>,
+        state_n:Vec<String>,
         finals:HashSet<usize>,
         trans:Vec<Vec<usize>>) -> Dfa {
         
         Dfa {
             alphabet: alpha,
+            state_names: state_n,
             final_states: finals,
             transitions: trans,
             state: 0
