@@ -1,9 +1,9 @@
 # automatoy
 Toy project for a deterministic finite automaton interpreter written in rust
 
-Usage: `cargo run <dfa file> <string to test> -v/--verbose`
+Usage: `cargo run <dfa file> <string> -v/--verbose`
 Where `<dfa file>` is the location of a file that describes a DFA (see folder `samples` for the syntax) 
-and `<string to test>` is the desired string you wish to test
+and `<string>` is the desired string you wish to test
 
 `-v`/`--verbose`: enable verbose mode (print each state reached during execution)
 
